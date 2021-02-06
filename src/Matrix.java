@@ -1,27 +1,45 @@
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Matrix {
-    private final int rows=10;
-    private final int columns=10;
+    //Количество строк
+    private final int ROWS=10;
+    //Количество столбцов
+    private final int COLUMNS=10;
 
-    private Element[][] mtrx=new Element[rows][columns];
+    //Массив лидеров с т.з. механизма домbнирования
+    private ArrayList<DecisionOption> leadersDom=new ArrayList<>();
+
+    //Массив лидеров с т.з. механизма блокировки
+    private ArrayList<DecisionOption> leadersBlock=new ArrayList<>();
+
+    private Element[][] mtrx=new Element[ROWS][COLUMNS];
 
     //Геттеры, сеттеры
     public int getRows() {
-        return this.rows;
+        return this.ROWS;
+    }
+    public int getColumns() {
+        return this.COLUMNS;
+    }
+    public Element[][] getMtrx() {
+        return this.mtrx;
+    }
+    public ArrayList<DecisionOption> getLeadersDom() {
+        return leadersDom;
+    }
+    public ArrayList<DecisionOption> getLeadersBlock() {
+        return leadersBlock;
     }
 
-    public int getColumns() {
-        return this.columns;
-    }
 
     //Конструктор
     public Matrix(String filename) {
-        for (int i=0; i<rows; i++) {
-            for (int j=0; j<columns; j++) {
+        for (int i=0; i<ROWS; i++) {
+            for (int j=0; j<COLUMNS; j++) {
                 mtrx[i][j]=new Element();
             }
         }
@@ -47,18 +65,12 @@ public class Matrix {
         }
     }
 
-    //Распечатка матрицы
-    public void print() {
-        for (int i=0; i<rows; i++) {
-            for (int j=0; j<columns; j++) {
-                System.out.print(mtrx[i][j].getValue()+" ");
-            }
 
-            System.out.println();
-        }
+    public void addLeadersDom(DecisionOption leader) {
+        leadersDom.add(leader);
     }
 
-    public Element[][] getMtrx() {
-        return this.mtrx;
+    public void addLeadersBlock(DecisionOption leader) {
+        leadersBlock.add(leader);
     }
 }
